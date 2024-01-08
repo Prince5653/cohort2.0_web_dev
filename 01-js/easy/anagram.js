@@ -5,22 +5,19 @@
 */
 
 function isAnagram(str1, str2) {
-  const str1Lower = str1.toLowerCase();
-  const str2Lower = str2.toLowerCase();
-  if (str1Lower.length !== str2Lower.length) {
-    return false;
+  str1 = sortString(str1.toLowerCase()); //we use toLowerCase() to ensures that the comparison between characters is case-insensitive.
+  str2 = sortString(str2.toLowerCase());
+  if (str1 === str2) {
+    return true;
   }
+  return false;
+}
 
-  const str1Counter = {};
-
-  for (const char of str1Lower) {
-    str1Counter[char] = (str1Counter[char] || 0) + 1;
-  }
-  for (const char of str2Lower) {
-    if (!str1Counter[char]) return false;
-    str1Counter[char] -= 1;
-  }
-  return true
+function sortString(str) {
+  let charArray = str.split('')  // converts the string into an array of characters using split('')
+  charArray.sort();      //Then, it uses the sort() method to arrange the characters in alphabetical order.
+  let ans = charArray.join('') // join('')  joins the sorted array back into a string and returns the sorted string.
+  return ans;
 }
 
 module.exports = isAnagram;
